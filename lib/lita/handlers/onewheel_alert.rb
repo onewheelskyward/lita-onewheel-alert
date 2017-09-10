@@ -13,7 +13,7 @@ module Lita
       route /.*/i, :alert
 
       def alert(response)
-        Lita.logger.debug "Checking for match of #{config.alert} in #{response.matches[0]}"
+        # Lita.logger.debug "Checking for match of #{config.alert} in #{response.matches[0]}"
         if response.matches[0].match /#{config.alert}/
           Lita.logger.debug "Heard #{response.matches[0]}"
           client = Twilio::REST::Client.new config.account_sid, config.auth_token
