@@ -22,7 +22,7 @@ module Lita
           to: config.sms_number,
           from: config.twilio_number
         )
-        response.reply message.sid
+        Lita.logger.debug "Message SID: #{message.sid}"
       end
 
       Lita.register_handler(self)
