@@ -8,21 +8,22 @@ module Lita
       config :auth_token, required: true
       config :sms_number, required: true
       config :twilio_number, required: true
+      config :alert, required: true
 
-      route /.*onewheelskyward.*/i,
-            :alert
-      route /.*ows.*/i,
-            :alert
+      route /.*/i, :alert
 
       def alert(response)
-        Lita.logger.debug "Heard #{response.matches[0]}"
-        client = Twilio::REST::Client.new config.account_sid, config.auth_token
-        message = client.messages.create(
-          body: response.matches[0],
-          to: config.sms_number,
-          from: config.twilio_number
-        )
-        Lita.logger.debug "Message SID: #{message.sid}"
+        Lita.logger.debug "Checking for match of #{config.alert} in #{response.matches[0]}"
+        if response.matches[0].match /#{config.alert}/
+          Lita.logger.debug "Heard #{response.matches[0]}"
+          client = Twilio::REST::Client.new config.account_sid, config.auth_token
+          message = client.messages.create(
+            body: response.matches[0],
+            to: config.sms_number,
+            from: config.twilio_number
+          )
+          Lita.logger.debug "Message SID: #{message.sid}"
+        end
       end
 
       Lita.register_handler(self)
