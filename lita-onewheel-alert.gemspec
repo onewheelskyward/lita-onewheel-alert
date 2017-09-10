@@ -16,8 +16,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'lita', '~> 4'
   spec.add_runtime_dependency 'rest-client', '~> 1.8'
-  # Old 'n busted
-  # spec.add_runtime_dependency 'twilio-ruby', '~> 5'
+  spec.add_runtime_dependency 'twilio-ruby', '~> 5'
 
   spec.add_development_dependency 'bundler', '~> 1'
 
@@ -26,5 +25,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec', '~> 3'
   spec.add_development_dependency 'simplecov', '~> 0'
   spec.add_development_dependency 'coveralls', '~> 0'
-  spec.add_development_dependency 'twilio_mock', '~> 0'
+  # Old 'n busted
+  # spec.add_development_dependency 'twilio_mock', '~> 0'
 end
