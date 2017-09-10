@@ -18,7 +18,7 @@ module Lita
           Lita.logger.debug "Heard #{response.matches[0]}"
           client = Twilio::REST::Client.new config.account_sid, config.auth_token
           message = client.messages.create(
-            body: response.matches[0],
+            body: "<#{response.message.user.name}> #{response.matches[0]}",
             to: config.sms_number,
             from: config.twilio_number
           )
