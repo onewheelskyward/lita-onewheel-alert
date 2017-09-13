@@ -37,10 +37,8 @@ module Lita
         boo = qs['Body'][0].sub /\#\w+/, ''
         Lita.logger.info boo
         robot = request.env['lita.robot']
-        # source = Lita::Source.new(user: nil, room: room)
-        # robot.send_messages(source, boo)
-
-        response.body << "Hello, #{request.body}!"
+        source = Lita::Source.new(user: nil, room: room)
+        robot.send_messages(source, boo)
       end
 
       Lita.register_handler(self)
