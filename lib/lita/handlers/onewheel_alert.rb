@@ -11,7 +11,7 @@ module Lita
       config :alert, required: true
 
       route /.*/i, :alert
-      http.post "/sms", :respond_sms
+      http.get "/sms", :respond_sms
 
       def alert(response)
         # Lita.logger.debug "Checking for match of #{config.alert} in #{response.matches[0]}"
