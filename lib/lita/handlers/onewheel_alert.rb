@@ -30,8 +30,8 @@ module Lita
 
       def respond_sms(request, response)
         Lita.logger.info request.inspect
-        Lita.logger.info ENV['QUERY_STRING']
-        qs = CGI.parse ENV['QUERY_STRING']
+        Lita.logger.info env['QUERY_STRING']
+        qs = CGI.parse env['QUERY_STRING']
         Lita.logger.info qs.inspect
         response.body << "Hello, #{request.body}!"
       end
