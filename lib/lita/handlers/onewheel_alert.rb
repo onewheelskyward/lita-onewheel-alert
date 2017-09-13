@@ -29,7 +29,8 @@ module Lita
       end
 
       def respond_sms(request, response)
-        qs = CGI.parse request['QUERY_STRING']
+        Lita.logger.info ENV['QUERY_STRING']
+        qs = CGI.parse ENV['QUERY_STRING']
         Lita.logger.info qs.inspect
         response.body << "Hello, #{request.body}!"
       end
