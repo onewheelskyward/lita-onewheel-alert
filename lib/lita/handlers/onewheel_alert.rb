@@ -33,7 +33,7 @@ module Lita
         qs = CGI.parse request.env['QUERY_STRING']
         Lita.logger.info qs['Body']
         room = qs['Body'][0].match /(\#\w+)/
-        Lita.logger.info room.inspect
+        Lita.logger.info room[1].inspect
         boo = qs['Body'][0].sub /\#\w+/, ''
         Lita.logger.info boo
         robot = request.env['lita.robot']
