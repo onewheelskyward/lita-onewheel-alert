@@ -11,6 +11,7 @@ module Lita
       config :alert, required: true
 
       route /.*/i, :alert
+      http.post "/sms", :respond_sms
 
       def alert(response)
         # Lita.logger.debug "Checking for match of #{config.alert} in #{response.matches[0]}"
@@ -24,6 +25,11 @@ module Lita
           )
           Lita.logger.debug "Message SID: #{message.sid}"
         end
+      end
+
+      def respond_sms(request, response)
+        Lita.logger.info request.inspect
+        response.body << "Hello, #{request.body}!"
       end
 
       Lita.register_handler(self)
