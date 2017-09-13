@@ -37,7 +37,7 @@ module Lita
         boo = qs['Body'][0].sub /\#\w+/, ''
         Lita.logger.info boo
         robot = request.env['lita.robot']
-        source = Lita::Source.new(user: nil, room: room)
+        source = Lita::Source.new(user: nil, room: room[1])
         robot.send_messages(source, boo)
       end
 
