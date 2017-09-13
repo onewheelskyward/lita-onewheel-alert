@@ -1,5 +1,6 @@
 require 'rest-client'
 require 'twilio-ruby'
+require 'cgi'
 
 module Lita
   module Handlers
@@ -11,7 +12,7 @@ module Lita
       config :alert, required: true
 
       route /.*/i, :alert
-      http.get "/sms", :respond_sms
+      http.get '/sms', :respond_sms
 
       def alert(response)
         # Lita.logger.debug "Checking for match of #{config.alert} in #{response.matches[0]}"
@@ -28,7 +29,8 @@ module Lita
       end
 
       def respond_sms(request, response)
-        Lita.logger.info request.inspect
+        qs = CGI.parse request['QUERY_STRING'].body
+        Lita.logger.info qs.inspect
         response.body << "Hello, #{request.body}!"
       end
 
