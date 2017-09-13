@@ -33,11 +33,14 @@ module Lita
         qs = CGI.parse request.env['QUERY_STRING']
         Lita.logger.info qs['Body']
         room = qs['Body'][0].match /(\#\w+)/
-        Lita.logger.info room[1].inspect
+        room = room[1]
+        Lita.logger.info room.inspect
         boo = qs['Body'][0].sub /\#\w+/, ''
+        boo = "<onewheelskyward sms bridge>: #{boo}"
         Lita.logger.info boo
+
         robot = request.env['lita.robot']
-        source = Lita::Source.new(user: nil, room: room[1])
+        source = Lita::Source.new(user: nil, room: room)
         robot.send_messages(source, boo)
       end
 
